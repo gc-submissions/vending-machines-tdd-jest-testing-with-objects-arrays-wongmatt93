@@ -19,9 +19,9 @@ const removeItem = (itemsArray, index) => {
 };
 
 module.exports = {
-  calculateChange,
-  isSufficientPayment,
-  calculateTotal,
   addItem,
+  calculateTotal,
+  isSufficientPayment,
+  calculateChange,
   removeItem,
 };

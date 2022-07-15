@@ -1,16 +1,22 @@
 let { formatCurrency, getCoins } = require("./money-functions");
-const { addItem, calculateTotal, isSufficientPayment, calculateChange, removeItem } = require("./cart-functions");
+const {
+  addItem,
+  calculateTotal,
+  isSufficientPayment,
+  calculateChange,
+  removeItem,
+} = require("./cart-functions");
 
 // temporary formatCurrency function if the real one doesn't exist.
-formatCurrency = formatCurrency || (x => x);
+formatCurrency = formatCurrency || ((x) => x);
 
 const menu = [
-  { name: "Candy Bar", price: .95 },
+  { name: "Candy Bar", price: 0.95 },
   { name: "Bag of Chips", price: 1.29 },
-  { name: "Can of Soda", price: 1.80 },
-  { name: "Bottle of Milk", price: 3.00 },
-  { name: "Box of Cherries", price: 5.13 }
-]
+  { name: "Can of Soda", price: 1.8 },
+  { name: "Bottle of Milk", price: 3.0 },
+  { name: "Box of Cherries", price: 5.13 },
+];
 setupUI();
 
 function setupUI() {
@@ -21,16 +27,20 @@ function setupUI() {
   const cashForm = document.getElementById("cashForm");
   const changeDueOutput = document.getElementById("changeDue");
   const cashInsertedOutput = document.getElementById("cashInserted");
-  const paymentInsufficientMessage = document.getElementById("paymentInsufficientMessage");
+  const paymentInsufficientMessage = document.getElementById(
+    "paymentInsufficientMessage"
+  );
   const changeSection = document.getElementById("change");
   const changeOutputs = changeSection.querySelectorAll(".change-count");
   const resetButton = document.getElementById("resetButton");
 
   menu.forEach((item, i) => {
-    menuList.insertAdjacentHTML('beforeend',
+    menuList.insertAdjacentHTML(
+      "beforeend",
       `<li>${formatCurrency(item.price)} - ${item.name}
         <button data-index="${i}">Buy</button>
-      </li>`);
+      </li>`
+    );
   });
 
   let cartArray = [];
@@ -39,7 +49,7 @@ function setupUI() {
     const itemIndex = parseInt(e.target.getAttribute("data-index"));
     if (!isNaN(itemIndex)) {
       const item = menu[itemIndex];
-      addItem(cartArray, item.name, item.price)
+      addItem(cartArray, item.name, item.price);
       updateBill();
     }
   });
@@ -92,12 +102,14 @@ function setupUI() {
   function updateBill() {
     selectedItemsList.innerHTML = "";
     cartArray.forEach((item, i) => {
-      selectedItemsList.insertAdjacentHTML("beforeend", 
-      `<tr>
+      selectedItemsList.insertAdjacentHTML(
+        "beforeend",
+        `<tr>
         <td>${item.name}</td>
         <td>${formatCurrency(item.price)}</td>
         <td><button data-index="${i}">Remove</button></td>
-      </tr>`);
+      </tr>`
+      );
     });
     const total = calculateTotal(cartArray);
     totalOutput.innerText = formatCurrency(total);

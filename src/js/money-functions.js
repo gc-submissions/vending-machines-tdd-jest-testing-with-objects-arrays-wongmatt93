@@ -4,7 +4,7 @@ const formatCurrency = (amount) => {
     : `$${(Math.round(amount * 100) / 100).toFixed(2)}`;
 };
 
-const cents = (coins) => {
+const getCoins = (coins) => {
   let wallet = {
     quarters: 0,
     dimes: 0,
@@ -31,4 +31,4 @@ const cents = (coins) => {
   return wallet;
 };
 
-module.exports = { formatCurrency, cents };
+module.exports = { formatCurrency, getCoins };

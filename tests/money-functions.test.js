@@ -1,4 +1,4 @@
-const { formatCurrency, cents } = require("../src/js/money-functions");
+const { formatCurrency, getCoins } = require("../src/js/money-functions");
 
 describe("formatCurrency", () => {
   test("0 returns '$0.00'", () => {
@@ -37,7 +37,7 @@ describe("formatCurrency", () => {
 
 describe("getCoins", () => {
   test("32 cents produces quarters: 1, dimes: 0, nickels: 1, pennies: 2", () => {
-    const result = cents(0.32);
+    const result = getCoins(0.32);
     expect(result).toEqual({
       quarters: 1,
       dimes: 0,
@@ -46,7 +46,7 @@ describe("getCoins", () => {
     });
   });
   test("10 cents produces: quarters: 0, dimes: 1, nickels: 0, pennies: 0", () => {
-    const result = cents(0.1);
+    const result = getCoins(0.1);
     expect(result).toEqual({
       quarters: 0,
       dimes: 1,
@@ -55,7 +55,7 @@ describe("getCoins", () => {
     });
   });
   test("27 cents produces: quarters: 1, dimes: 0, nickels: 0, pennies: 2", () => {
-    const result = cents(0.27);
+    const result = getCoins(0.27);
     expect(result).toEqual({
       quarters: 1,
       dimes: 0,
@@ -64,7 +64,7 @@ describe("getCoins", () => {
     });
   });
   test("68 cents produces: quarters: 2, dimes: 1, nickels: 1, pennies: 3", () => {
-    const result = cents(0.68);
+    const result = getCoins(0.68);
     expect(result).toEqual({
       quarters: 2,
       dimes: 1,
